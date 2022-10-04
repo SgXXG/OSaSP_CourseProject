@@ -29,4 +29,15 @@ namespace CPPSnake {
 
 		return true;
 	}
+	LRESULT ApplicationWindow::staticWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+	{
+		if (msg == WM_CREATE) SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)((CREATESTRUCT*)lParam)->lpCreateParams);
+
+		ApplicationWindow* appWindow = (ApplicationWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+		if (appWindow) return appWindow->wndProc(hWnd, msg, wParam, lParam);
+	}
+	LRESULT ApplicationWindow::wndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+	{
+		return LRESULT();
+	}
 }
