@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ApplicationWindow.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pch.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
