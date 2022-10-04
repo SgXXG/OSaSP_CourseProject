@@ -12,6 +12,8 @@ namespace CPPSnake {
 		ApplicationWindow() {};
 		~ApplicationWindow();
 
+		Bool initialize();
+
 	public:
 
 		HWND getHandle() const { return _handle;  }
