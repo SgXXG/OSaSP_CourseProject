@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationWindow.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Pch.h" />
   </ItemGroup>
