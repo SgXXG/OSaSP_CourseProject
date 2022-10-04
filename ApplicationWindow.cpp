@@ -1,7 +1,6 @@
 #include "Pch.h"
 #include "Application.h"
 #include "ApplicationWindow.h"
-#include <minwindef.h>
 
 namespace CPPSnake {
 
@@ -51,8 +50,8 @@ namespace CPPSnake {
 		case WM_SIZE:
 
 			if (wParam != SIZE_MINIMIZED) {
-				_clientSize.width = (UInt32)(LOWORD(lParam));
-				_clientSize.height = (UInt32)(HIWORD(lParam));
+				_clientSize.width = (UInt32)LOWORD(lParam);
+				_clientSize.height = (UInt32)HIWORD(lParam);
 				_isMinimized = false;
 			}
 			else {
