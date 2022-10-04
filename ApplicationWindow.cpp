@@ -1,4 +1,5 @@
 #include "Pch.h"
+#include "Application.h"
 #include "ApplicationWindow.h"
 #include <minwindef.h>
 
@@ -69,7 +70,7 @@ namespace CPPSnake {
 
 		case WM_DESTROY:
 
-			PostQuitMessage(0);
+			_app->quit();
 			return 0;
 
 		default:
