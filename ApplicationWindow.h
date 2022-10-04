@@ -22,6 +22,10 @@ namespace CPPSnake {
 		UInt32 getClientWidth() const { return _clientSize.width; }
 		UInt32 getClientHeight() const { return _clientSize.height; }
 
+	private:
+
+		static LRESULT CALLBACK staticWndProc (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+		LRESULT CALLBACK wndProc (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	private:
 
