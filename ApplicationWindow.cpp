@@ -1,7 +1,14 @@
 #include "Pch.h"
 #include "ApplicationWindow.h"
+#include <minwindef.h>
+
+#define HIDWORD(dw, hw) LOWORD(dw) | (hw << 16)
+#define LODWORD(dw, lw) (HIWORD(dw) << 16) | lw
 
 namespace CPPSnake {
+
+	ApplicationWindow* _appWindow{};
+
 	ApplicationWindow::~ApplicationWindow() {
 		if (_handle) DestroyWindow(_handle);
 	}
@@ -29,6 +36,7 @@ namespace CPPSnake {
 
 		return true;
 	}
+
 	LRESULT ApplicationWindow::staticWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		if (msg == WM_CREATE) SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)((CREATESTRUCT*)lParam)->lpCreateParams);
@@ -38,8 +46,38 @@ namespace CPPSnake {
 
 		return DefWindowProc (hWnd, msg, wParam, lParam);
 	}
+
 	LRESULT ApplicationWindow::wndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
-		return LRESULT();
+		switch (msg) {
+		case WM_SIZE:
+
+			if (wParam != SIZE_MINIMIZED) {
+				_clientSize.width = (UInt32)(LOWORD(lParam));
+				_clientSize.height = (UInt32)(HIWORD(lParam));
+				_isMinimized = false;
+			}
+			else {
+				_clientSize.width = 0;
+				_clientSize.height = 0;
+				_isMinimized = true;
+			}
+
+			return 0;
+
+		case WM_CLOSE:
+
+			DestroyWindow(_handle);
+			return 0;
+
+		case WM_DESTROY:
+
+			PostQuitMessage(0);
+			return 0;
+
+		default:
+
+			return DefWindowProc(hWnd, msg, wParam, lParam);
+		}
 	}
 }

@@ -21,6 +21,7 @@ namespace CPPSnake {
 		Size2UI32 getClientSize() const { return _clientSize; }
 		UInt32 getClientWidth() const { return _clientSize.width; }
 		UInt32 getClientHeight() const { return _clientSize.height; }
+		BOOL isMinimized() const { return _isMinimized; }
 
 	private:
 
@@ -31,6 +32,7 @@ namespace CPPSnake {
 
 		HWND _handle{};
 		HDC _clientDC{};
+		BOOL _isMinimized{};
 		Size2UI32 _clientSize{};
 
 	};
