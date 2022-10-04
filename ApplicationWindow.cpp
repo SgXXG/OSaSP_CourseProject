@@ -2,9 +2,6 @@
 #include "ApplicationWindow.h"
 #include <minwindef.h>
 
-#define HIDWORD(dw, hw) LOWORD(dw) | (hw << 16)
-#define LODWORD(dw, lw) (HIWORD(dw) << 16) | lw
-
 namespace CPPSnake {
 
 	ApplicationWindow* _appWindow{};
