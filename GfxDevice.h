@@ -21,6 +21,10 @@ namespace CPPSnake {
 		Void clearColor(UInt32 color);
 		Void present();
 
+		UInt32 getBufferWidth() const { return _bufferWidth; };
+		UInt32 getBufferHeight() const { return _bufferHeight; }
+		UInt32* getColorBuffer() const { return _colorBuffer; }
+
 	private:
 
 		Bool createBackBuffer();

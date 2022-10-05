@@ -40,6 +40,8 @@ namespace CPPSnake {
 
 		UInt32 getNumCellsX() const { return _numCellsX; }
 		UInt32 getNumCellsY() const { return _numCellsY; }
+		UInt32 getTotalNumCells() const { return _numCellsX * _numCellsY; }
+
 		Coord2I32 getTopLeft() const { return _topLeft; }
 		UInt32 getCellSize() const { return _settings.cellSize; }
 
