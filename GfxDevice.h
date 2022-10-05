@@ -1,10 +1,11 @@
 #pragma once
 #include "Core.h"
 #include <windows.h>
+#include "ApplicationWindow.h"
 
 namespace CPPSnake {
 
-	class GfxDevice {
+	class GfxDevice : public IApplicationWindowListener {
 
 		friend class Application;
 
@@ -23,6 +24,7 @@ namespace CPPSnake {
 	private:
 
 		Bool createBackBuffer();
+		Void onAppWindowResized(const UInt32& newClientSize, Bool isMinimized);
 
 	private:
 

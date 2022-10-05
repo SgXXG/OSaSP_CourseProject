@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "ApplicationWindow.h"
+#include "GfxDevice.h"
 
 namespace CPPSnake {
 	

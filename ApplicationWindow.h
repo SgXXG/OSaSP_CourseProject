@@ -3,7 +3,15 @@
 #include <windows.h>
 
 namespace CPPSnake {
-	class ApplicationWindow {
+
+	class IApplicationWindowListener {
+
+	public:
+
+		virtual Void onAppWindowResized(const Size2UI32& newClientSize, Bool isMinimized) = 0;
+	};
+	
+	class ApplicationWindow : public EventDispatcher<IApplicationWindowListener> {
 
 		friend class Application;
 

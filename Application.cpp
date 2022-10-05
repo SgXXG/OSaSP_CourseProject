@@ -6,6 +6,7 @@ namespace CPPSnake {
 	Application* _app{};
 	Application::~Application() {
 	
+		delete _gfxDevice;
 		delete _appWindow;
 	}
 
@@ -13,6 +14,8 @@ namespace CPPSnake {
 	{
 		_appWindow = new ApplicationWindow();
 		if (!_appWindow -> initialize()) return false;
+		_gfxDevice = new GfxDevice();
+		if (!_gfxDevice->initialize()) return false;
 
 		return true;
 	}
@@ -40,6 +43,7 @@ namespace CPPSnake {
 
 	Void Application::processFrame()
 	{
-		return Void();
+		_gfxDevice->clearColor(0x00000000);
+		_gfxDevice->present();
 	}
 }

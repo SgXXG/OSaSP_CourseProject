@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <intrin.h>
+#include <vector>
+#include <string>
 
 #pragma intrinsic(__stosd)
 
@@ -74,5 +76,25 @@ namespace CPPSnake {
 			};
 			UInt32 value{};
 		};
+	};
+
+	template <typename T>
+	class EventDispatcher {
+
+	public:
+
+		Void addListener(T* l) { _listeners.push_back(l); }
+		Void removeListener(T* l) {
+
+			auto iterFound = std::find(_listeners.begin(), _listeners.end(), l);
+			if (iterFound != _listeners.end()) _listeners.erase(iterFound);
+		}
+
+		UInt32 getNumListeners() const { return (UInt32)_listeners.size(); }
+		T* getListener(UInt32 index) const { return _listeners[index]; }
+
+	private:
+
+		std::vector<T*> _listeners{};
 	};
 }

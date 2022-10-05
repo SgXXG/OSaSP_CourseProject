@@ -65,6 +65,13 @@ namespace CPPSnake {
 				_isMinimized = true;
 			}
 
+			{
+				UInt32 numListeners = getNumListeners();
+				for (UInt32 i = 0; i < numListeners; i++) 
+					getListener(i)->onAppWindowResized(_clientSize, _isMinimized);
+				
+			}
+
 			return 0;
 
 		case WM_CLOSE:
