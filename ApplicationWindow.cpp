@@ -47,6 +47,11 @@ namespace CPPSnake {
 	LRESULT ApplicationWindow::wndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (msg) {
+		case WM_KEYDOWN:
+
+			if (wParam == VK_ESCAPE) SendMessage(hWnd, WM_CLOSE, 0, 0);
+			return 0;
+
 		case WM_SIZE:
 
 			if (wParam != SIZE_MINIMIZED) {
