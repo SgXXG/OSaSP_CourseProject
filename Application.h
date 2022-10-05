@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "ApplicationWindow.h"
 #include "GfxDevice.h"
+#include "Grid.h"
 
 namespace CPPSnake {
 	
@@ -19,6 +20,10 @@ namespace CPPSnake {
 	private:
 
 		Void processFrame();
+
+	private:
+
+		GridSettings _gridSettings{};
 	};
 
 	extern Application* _app;

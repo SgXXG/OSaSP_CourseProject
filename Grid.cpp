@@ -47,6 +47,11 @@ namespace CPPSnake {
 			for (UInt32 y = 0; y < lineLength; ++y)
 				colorBuffer[(_topLeft.y + y) * bufferWidth + x] = _settings.lineColor;
 		}
-	}
 
+		numLines = _numCellsY + 1;
+		lineLength = _numCellsX * _settings.cellSize; 
+		for (UInt32 lineIndex = 0; lineIndex < numLines; ++lineIndex)
+			__stosd((PDWORD)&colorBuffer[(_topLeft.y + lineIndex * _settings.cellSize) 
+				* bufferWidth + _topLeft.x], _settings.lineColor, lineLength);
+	}
 }

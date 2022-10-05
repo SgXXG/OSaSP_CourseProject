@@ -6,6 +6,7 @@ namespace CPPSnake {
 	Application* _app{};
 	Application::~Application() {
 	
+		delete _grid;
 		delete _gfxDevice;
 		delete _appWindow;
 	}
@@ -16,6 +17,8 @@ namespace CPPSnake {
 		if (!_appWindow -> initialize()) return false;
 		_gfxDevice = new GfxDevice();
 		if (!_gfxDevice->initialize()) return false;
+		_grid = new Grid();
+		if (!_grid->initialize(_gridSettings)) return false;
 
 		return true;
 	}
@@ -44,6 +47,7 @@ namespace CPPSnake {
 	Void Application::processFrame()
 	{
 		_gfxDevice->clearColor(0x00000000);
+		_grid->draw();
 		_gfxDevice->present();
 	}
 }
