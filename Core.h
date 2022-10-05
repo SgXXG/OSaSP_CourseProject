@@ -25,6 +25,14 @@ namespace CPPSnake {
 	using Char = char;
 	using Void = void;
 
+	enum class Direction2D : UInt32 {
+
+		Left = 0,
+		Up,
+		Right, 
+		Down
+	};
+
 	template <typename T>
 	struct MallocBuffer {
 

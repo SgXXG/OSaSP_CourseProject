@@ -10,3 +10,6 @@
 #include "Application.h"
 #include "ApplicationWindow.h"
 #include "GfxDevice.h"
+#include "Grid.h"
+#include "Snake.h"
+#include "Timer.h"

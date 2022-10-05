@@ -38,6 +38,24 @@ namespace CPPSnake {
 
 	public:
 
+		Void setHasSnake(UInt32 x, UInt32 y, Bool hasSnake) {
+
+			if (hasSnake)_cells[x + y * _numCellsX].flags |= (UInt32)CellFlags::HasSnake;
+			else _cells[x + y * _numCellsX].flags &= (UInt32)CellFlags::HasSnake;
+		}
+
+		Coord2I32 calcCellTopLeft(UInt32 x, UInt32 y) {
+
+			return Coord2I32((UInt32)_topLeft.x + x + _settings.cellSize,
+							 (UInt32)_topLeft.y + y + _settings.cellSize);
+		}
+
+		Bool hasFood(UInt32 x, UInt32 y) { return _cells[x + y * _numCellsX].flags & 
+												  (UInt32)CellFlags::HasFood; }
+		Bool hasSnake(UInt32 x, UInt32 y) { return _cells[x + y * _numCellsX].flags &
+												  (UInt32)CellFlags::HasSnake;
+		}
+
 		UInt32 getNumCellsX() const { return _numCellsX; }
 		UInt32 getNumCellsY() const { return _numCellsY; }
 		UInt32 getTotalNumCells() const { return _numCellsX * _numCellsY; }

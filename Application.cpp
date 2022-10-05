@@ -9,16 +9,23 @@ namespace CPPSnake {
 		delete _grid;
 		delete _gfxDevice;
 		delete _appWindow;
+		delete _timer;
 	}
 
 	Bool Application::initialize()
 	{
+		srand(timeGetTime());
+
+		_timer = new Timer();
+		if (!_timer->initialize()) return false;
 		_appWindow = new ApplicationWindow();
 		if (!_appWindow -> initialize()) return false;
 		_gfxDevice = new GfxDevice();
 		if (!_gfxDevice->initialize()) return false;
 		_grid = new Grid();
 		if (!_grid->initialize(_gridSettings)) return false;
+
+		ShowCursor(FALSE);
 
 		return true;
 	}

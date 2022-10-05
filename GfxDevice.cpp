@@ -44,6 +44,31 @@ namespace CPPSnake {
 			_backBufferDC, 0, 0, SRCCOPY);
 	}
 
+	Void GfxDevice::drawSquare(const Coord2I32& topLeft, UInt32 size, UInt32 color)
+	{
+		Int32 left = topLeft.x;
+		if (left >= (Int32)_bufferWidth) return;
+
+		Int32 right = topLeft.y;
+		if (right < 0) return;
+
+		if (left < 0) left = 0;
+		if (right >= (Int32)_bufferWidth) right = _bufferWidth - 1;
+
+		Int32 top = topLeft.y;
+		if (top >= (Int32)_bufferHeight) return;
+
+		Int32 bottom = top + size - 1;
+		if (bottom < 0) return;
+
+		if (top < 0) top = 0;
+		if (bottom >= (Int32)_bufferHeight) bottom = _bufferHeight;
+
+		size = right - left + 1;
+		for (Int32 y = top; y <= bottom; ++y)
+			__stosd((PDWORD)&_colorBuffer[left + y * _bufferWidth], color, size);
+	}
+
 	Bool GfxDevice::createBackBuffer()
 	{
 		if (_backBuffer) {

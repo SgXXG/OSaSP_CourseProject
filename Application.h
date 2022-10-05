@@ -3,6 +3,8 @@
 #include "ApplicationWindow.h"
 #include "GfxDevice.h"
 #include "Grid.h"
+#include "Timer.h"
+#include "Snake.h"
 
 namespace CPPSnake {
 	
