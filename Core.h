@@ -1,5 +1,8 @@
 #pragma once
 #include <cstdint>
+#include <intrin.h>
+
+#pragma intrinsic(__stosd)
 
 namespace CPPSnake {
 	
