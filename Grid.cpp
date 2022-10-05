@@ -79,7 +79,7 @@ namespace CPPSnake {
 				_foodCoords.x = rand() % _numCellsX;
 				_foodCoords.y = rand() % _numCellsY;
 
-				_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags |= ~(UInt32)CellFlags::HasFood;
+				_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags |= (UInt32)CellFlags::HasFood;
 			
 				++iterIndex;
 			}
