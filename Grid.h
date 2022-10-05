@@ -38,6 +38,8 @@ namespace CPPSnake {
 
 	public:
 
+		Void generateFood();
+
 		Void setHasSnake(UInt32 x, UInt32 y, Bool hasSnake) {
 
 			if (hasSnake)_cells[x + y * _numCellsX].flags |= (UInt32)CellFlags::HasSnake;
@@ -70,6 +72,7 @@ namespace CPPSnake {
 		UInt32 _numCellsY{};
 
 		Coord2I32 _topLeft{};
+		Coord2I32 _foodCoords{};
 
 		MallocBuffer<Cell> _cells{};
 	};

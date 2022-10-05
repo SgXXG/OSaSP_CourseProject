@@ -31,6 +31,7 @@ namespace CPPSnake {
 		rem = _appWindow->getClientHeight() - _numCellsY * _settings.cellSize;
 		_topLeft.y = (UInt32)(rem * 0.5f);
 
+		generateFood();
 		return true;
 	}
 
@@ -38,6 +39,9 @@ namespace CPPSnake {
 	{
 		UInt32 bufferWidth = _gfxDevice->getBufferWidth();
 		UInt32* colorBuffer = _gfxDevice->getColorBuffer();
+
+		Coord2I32 foodTopLeft = calcCellTopLeft(_foodCoords.x, _foodCoords, y);
+		_gfxDevice->drawSquare(foodTopLeft, _settings.cellSize, _settings.foodColor);
 
 		UInt32 numLines = _numCellsX + 1;
 		UInt32 lineLength = _numCellsY * _settings.cellSize;
@@ -53,5 +57,32 @@ namespace CPPSnake {
 		for (UInt32 lineIndex = 0; lineIndex < numLines; ++lineIndex)
 			__stosd((PDWORD)&colorBuffer[(_topLeft.y + lineIndex * _settings.cellSize) 
 				* bufferWidth + _topLeft.x], _settings.lineColor, lineLength);
+	}
+
+	Void Grid::generateFood()
+	{
+		_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags &= ~(UInt32)CellFlags::HasFood;
+		
+		_foodCoords.x = rand() % _numCellsX;
+		_foodCoords.y = rand() % _numCellsY;
+
+		_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags |= ~(UInt32)CellFlags::HasFood;
+
+		if (hasSnake(_foodCoords.x, _foodCoords.y)) {
+
+			const UInt32 maxNumIters = 500;
+			UInt32 iterIndex{};
+			while (iterIndex < maxNumIters && hasSnake(_foodCoords.x, _foodCoords.y))
+			{
+				_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags &= ~(UInt32)CellFlags::HasFood;
+
+				_foodCoords.x = rand() % _numCellsX;
+				_foodCoords.y = rand() % _numCellsY;
+
+				_cells[_foodCoords.x + _foodCoords.y * _numCellsX].flags |= ~(UInt32)CellFlags::HasFood;
+			
+				++iterIndex;
+			}
+		}
 	}
 }

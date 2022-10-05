@@ -21,6 +21,7 @@ namespace CPPSnake {
 		~Snake() {}
 
 		Bool initialize(const SnakeSettings& settings);
+		Void update();
 		Void draw();
 
 	public:
