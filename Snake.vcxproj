@@ -143,6 +143,7 @@
     <ClInclude Include="ApplicationWindow.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="GfxDevice.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Pch.h" />
   </ItemGroup>
   <ItemGroup>
