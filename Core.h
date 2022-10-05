@@ -26,6 +26,31 @@ namespace CPPSnake {
 	using Void = void;
 
 	template <typename T>
+	struct MallocBuffer {
+
+		MallocBuffer() {}
+		~MallocBuffer() { free(items); }
+
+		Void grow(UInt32 amount) {
+
+			T* newBuffer = new T[amount + capacity];
+			if (items) memcpy(newBuffer, items, numItems * sizeof(T));
+
+			items = newBuffer;
+			capacity += amount;
+		}
+
+		Void add(const T& t) { items[numItems++] = t; }
+
+		T& operator [] (UInt32 index) { return items[index]; }
+		const T& operator [] (UInt32 index) const { return items[index]; }
+
+		T* items{};
+		UInt32 numItems{};
+		UInt32 capacity{};
+	};
+
+	template <typename T>
 	struct Size2 {
 		Size2() {}
 		Size2 (const T& w, const T& h) : width(w), height(h) {}
