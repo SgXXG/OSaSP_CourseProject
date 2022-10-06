@@ -1,6 +1,7 @@
 #include "Pch.h"
 #include "Application.h"
 #include "ApplicationWindow.h"
+#include "Snake.h"
 
 namespace CPPSnake {
 
@@ -50,6 +51,11 @@ namespace CPPSnake {
 		case WM_KEYDOWN:
 
 			if (wParam == VK_ESCAPE) SendMessage(hWnd, WM_CLOSE, 0, 0);
+			else if (wParam == VK_LEFT) _snake->setMoveDirection(Direction2D::Left);
+			else if (wParam == VK_RIGHT) _snake->setMoveDirection(Direction2D::Right);
+			else if (wParam == VK_UP) _snake->setMoveDirection(Direction2D::Up);
+			else if (wParam == VK_DOWN) _snake->setMoveDirection(Direction2D::Down);
+
 			return 0;
 
 		case WM_SIZE:

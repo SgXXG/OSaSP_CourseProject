@@ -6,7 +6,7 @@ namespace CPPSnake {
 	struct SnakeSettings {
 
 		UInt32 headColor = 0x0000FF00;
-		UInt32 tailCOlor = 0x00008800;
+		UInt32 tailColor = 0x00008800;
 		Float moveTimeStep = 0.12f;
 		Float minMoveTimeStep = 0.033f;
 	};

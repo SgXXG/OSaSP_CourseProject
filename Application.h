@@ -26,6 +26,7 @@ namespace CPPSnake {
 	private:
 
 		GridSettings _gridSettings{};
+		SnakeSettings _snakeSettings{};
 	};
 
 	extern Application* _app;

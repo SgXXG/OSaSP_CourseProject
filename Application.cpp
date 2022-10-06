@@ -6,6 +6,7 @@ namespace CPPSnake {
 	Application* _app{};
 	Application::~Application() {
 	
+		delete _snake;
 		delete _grid;
 		delete _gfxDevice;
 		delete _appWindow;
@@ -24,6 +25,8 @@ namespace CPPSnake {
 		if (!_gfxDevice->initialize()) return false;
 		_grid = new Grid();
 		if (!_grid->initialize(_gridSettings)) return false;
+		_snake = new Snake();
+		if (!_snake->initialize(_snakeSettings)) return false;
 
 		ShowCursor(FALSE);
 
@@ -54,6 +57,8 @@ namespace CPPSnake {
 	Void Application::processFrame()
 	{
 		_gfxDevice->clearColor(0x00000000);
+		_snake->update();
+		_snake->draw();
 		_grid->draw();
 		_gfxDevice->present();
 	}

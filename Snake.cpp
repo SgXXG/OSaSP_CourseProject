@@ -4,6 +4,9 @@
 #include"Timer.h"
 
 namespace CPPSnake {
+
+	Snake* _snake{};
+
 	Bool Snake::initialize(const SnakeSettings& settings)
 	{
 		_settings = settings;
@@ -35,9 +38,12 @@ namespace CPPSnake {
 			_timeSinceLastMove = currentTime;
 
 			_grid->setHasSnake(_body[_length - 1].x, _body[_length - 1].y, false);
-			for (UInt32 i = 0; i < _length - 1; i++)
+			for (UInt32 i = 0; i < _length - 1; --i) {
+
 				_body[i] = _body[i - 1];
-			
+				_grid->setHasSnake(_body[i].x, _body[i].y, false);
+			}
+				
 			switch (_moveDirection)
 			{
 			case Direction2D::Left:
@@ -90,6 +96,35 @@ namespace CPPSnake {
 
 	Void Snake::draw()
 	{
-		return Void();
+		Coord2I32 topLeft{};
+		topLeft = _grid->calcCellTopLeft(_body[0].x, _body[0].y);
+		_gfxDevice->drawSquare(topLeft, _grid->getCellSize(), _settings.headColor);
+
+		BGRA32 headColor = _settings.headColor;
+		BGRA32 tailColor = _settings.tailColor;
+
+		for (UInt32 i = 1; i < _length; i++)
+		{
+			Float t = (i + 1) / (Float)_length;
+			topLeft = _grid->calcCellTopLeft(_body[i].x, _body[i].y);
+			_gfxDevice->drawSquare(topLeft, _grid->getCellSize(), 
+				BGRA32::lerp(headColor, tailColor, t));
+		}
+	}
+
+	Void Snake::setMoveDirection(Direction2D moveDirection)
+	{
+		if (_moveDirection == moveDirection) return;
+
+		if (_length > 1) {
+
+			if (_moveDirection == Direction2D::Left && _moveDirection == Direction2D::Right) return;
+			if (_moveDirection == Direction2D::Right && _moveDirection == Direction2D::Left) return;
+
+			if (_moveDirection == Direction2D::Up && _moveDirection == Direction2D::Down) return;
+			if (_moveDirection == Direction2D::Down && _moveDirection == Direction2D::Up) return;
+		}
+
+		_moveDirection = moveDirection;
 	}
 }
