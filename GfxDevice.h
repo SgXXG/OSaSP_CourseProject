@@ -22,6 +22,7 @@ namespace CPPSnake {
 		Void present();
 
 		Void drawSquare(const Coord2I32& topLeft, UInt32 size, UInt32 color);
+		Void drawTransparentQuad(const Coord2I32& topLeft, UInt32 width, UInt32 height, UInt32 color);
 
 		UInt32 getBufferWidth() const { return _bufferWidth; };
 		UInt32 getBufferHeight() const { return _bufferHeight; }

@@ -5,8 +5,15 @@
 #include "Grid.h"
 #include "Timer.h"
 #include "Snake.h"
+#include "ResetSequence.h"
 
 namespace CPPSnake {
+
+	enum class GameState {
+
+		Snaking = 0,
+		Reset
+	};
 	
 	class Application {
 
@@ -28,6 +35,8 @@ namespace CPPSnake {
 
 		GridSettings _gridSettings{};
 		SnakeSettings _snakeSettings{};
+		ResetSequence _resetSequence{};
+		GameState _gameState = GameState::Snaking;
 	};
 
 	extern Application* _app;

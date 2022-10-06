@@ -57,17 +57,37 @@ namespace CPPSnake {
 	Void Application::processFrame()
 	{
 		_gfxDevice->clearColor(0x00000000);
-		_snake->update();
-		_snake->draw();
-		_grid->draw();
-		drawScore();
-		_gfxDevice->present();
 
-		if (_snake->bitItsOwnTail()) {
+		if (_gameState == GameState::Snaking) {
 
-			_snake->initialize(_snakeSettings);
-			_grid->initialize(_gridSettings);
+			_snake->update();
+			_snake->draw();
+			_grid->draw();
+			drawScore();
+
+			if (_snake->bitItsOwnTail()) {
+
+				_resetSequence.start();
+				_gameState = GameState::Reset;
+			}
 		}
+		else {
+
+			_snake->draw();
+			_grid->draw();
+			drawScore();
+			_resetSequence.draw();
+
+			if (_resetSequence.willStartToFadeIn()) {
+
+				_grid->initialize(_gridSettings);
+				_snake->initialize(_snakeSettings);
+			}
+
+			if (_resetSequence.isPlaying()) _gameState = GameState::Snaking;
+		}
+
+		_gfxDevice->present();
 	}
 
 	Void Application::drawScore()
