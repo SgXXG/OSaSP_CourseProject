@@ -86,6 +86,13 @@ namespace CPPSnake {
 				++_length;
 				++_numFoodEaten;
 
+				const UInt32 numFoodEatenRef = 80;
+				Float t = _numFoodEaten / (Float)numFoodEatenRef;
+				if (t > 1.0f) t = 1.0f;
+
+				_moveTimeStep = _settings.moveTimeStep + t * 
+					(_settings.minMoveTimeStep - _settings.moveTimeStep);
+
 				if (_body.capacity < _length)
 					_body.grow(_length - _body.capacity);
 

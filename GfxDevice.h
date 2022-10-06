@@ -26,6 +26,7 @@ namespace CPPSnake {
 		UInt32 getBufferWidth() const { return _bufferWidth; };
 		UInt32 getBufferHeight() const { return _bufferHeight; }
 		UInt32* getColorBuffer() const { return _colorBuffer; }
+		HDC getBackBufferDC() const { return _backBufferDC; }
 
 	private:
 

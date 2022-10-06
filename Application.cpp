@@ -60,6 +60,7 @@ namespace CPPSnake {
 		_snake->update();
 		_snake->draw();
 		_grid->draw();
+		drawScore();
 		_gfxDevice->present();
 
 		if (_snake->bitItsOwnTail()) {
@@ -67,5 +68,15 @@ namespace CPPSnake {
 			_snake->initialize(_snakeSettings);
 			_grid->initialize(_gridSettings);
 		}
+	}
+
+	Void Application::drawScore()
+	{
+		HDC backBufferDC = _gfxDevice->getBackBufferDC();
+
+		std::string scoreText = "Score: " + std::to_string(_snake->getNUmFoodEaten());
+
+		SetTextColor(backBufferDC, 0x00FFFFFF);
+		TextOut(backBufferDC, 10, 10, scoreText.c_str(), (Int32)scoreText.length());
 	}
 }

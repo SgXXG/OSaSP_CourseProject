@@ -22,6 +22,7 @@ namespace CPPSnake {
 	private:
 
 		Void processFrame();
+		Void drawScore();
 
 	private:
 
