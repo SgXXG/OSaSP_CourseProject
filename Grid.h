@@ -43,7 +43,7 @@ namespace CPPSnake {
 		Void setHasSnake(UInt32 x, UInt32 y, Bool hasSnake) {
 
 			if (hasSnake)_cells[x + y * _numCellsX].flags |= (UInt32)CellFlags::HasSnake;
-			else _cells[x + y * _numCellsX].flags &= (UInt32)CellFlags::HasSnake;
+			else _cells[x + y * _numCellsX].flags &= ~(UInt32)CellFlags::HasSnake;
 		}
 
 		Coord2I32 calcCellTopLeft(UInt32 x, UInt32 y) {

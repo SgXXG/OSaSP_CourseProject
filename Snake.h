@@ -29,6 +29,7 @@ namespace CPPSnake {
 		Void setMoveDirection(Direction2D moveDirection);
 
 		UInt32 getNUmFoodEaten() const { return _numFoodEaten; }
+		Bool bitItsOwnTail() const { return _bitItsOwnTail; }
 
 	private:
 

@@ -61,5 +61,11 @@ namespace CPPSnake {
 		_snake->draw();
 		_grid->draw();
 		_gfxDevice->present();
+
+		if (_snake->bitItsOwnTail()) {
+
+			_snake->initialize(_snakeSettings);
+			_grid->initialize(_gridSettings);
+		}
 	}
 }

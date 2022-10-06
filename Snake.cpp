@@ -26,6 +26,7 @@ namespace CPPSnake {
 
 		_timeSinceLastMove = _timer->getCurrentTime();
 		_moveTimeStep = _settings.moveTimeStep;
+		_bitItsOwnTail = false;
 
 		return true;
 	}
@@ -41,9 +42,11 @@ namespace CPPSnake {
 			for (UInt32 i = 0; i < _length - 1; --i) {
 
 				_body[i] = _body[i - 1];
-				_grid->setHasSnake(_body[i].x, _body[i].y, false);
+				_grid->setHasSnake(_body[i].x, _body[i].y, true);
 			}
 				
+			_grid->setHasSnake(_body[0].x, _body[0].y, false);
+
 			switch (_moveDirection)
 			{
 			case Direction2D::Left:
