@@ -1,10 +1,12 @@
 #pragma once
 
 #include <windows.h>
+
 #include <cstdint>
-#include <intrin.h>
+#include <cassert>
 #include <vector>
 #include <string>
+#include <intrin.h>
 
 #include "Core.h"
 #include "Application.h"

@@ -1,11 +1,12 @@
 #include "Pch.h"
 #include "Application.h"
 
-namespace CPPSnake {
-
+namespace CPPSnake
+{
 	Application* _app{};
-	Application::~Application() {
-	
+
+	Application::~Application()
+	{
 		delete _snake;
 		delete _grid;
 		delete _gfxDevice;
@@ -20,7 +21,7 @@ namespace CPPSnake {
 		_timer = new Timer();
 		if (!_timer->initialize()) return false;
 		_appWindow = new ApplicationWindow();
-		if (!_appWindow -> initialize()) return false;
+		if (!_appWindow->initialize()) return false;
 		_gfxDevice = new GfxDevice();
 		if (!_gfxDevice->initialize()) return false;
 		_grid = new Grid();
@@ -35,7 +36,9 @@ namespace CPPSnake {
 
 	Void Application::run()
 	{
-		MSG msg {};
+		SNK_ASSERT(_appWindow);
+
+		MSG msg{};
 		while (true)
 		{
 			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -57,34 +60,34 @@ namespace CPPSnake {
 	Void Application::processFrame()
 	{
 		_gfxDevice->clearColor(0x00000000);
-
-		if (_gameState == GameState::Snaking) {
-
+		if (_gameState == GameState::Snaking)
+		{
 			_snake->update();
 			_snake->draw();
 			_grid->draw();
 			drawScore();
 
-			if (_snake->bitItsOwnTail()) {
-
-				_resetSequence.start();
+			if (_snake->bitHisOwnTail())
+			{
 				_gameState = GameState::Reset;
+				_resetSequence.start();
 			}
 		}
-		else {
-
+		else
+		if (_gameState == GameState::Reset)
+		{
 			_snake->draw();
 			_grid->draw();
 			drawScore();
 			_resetSequence.draw();
 
-			if (_resetSequence.willStartToFadeIn()) {
-
-				_grid->initialize(_gridSettings);
-				_snake->initialize(_snakeSettings);
+			if (_resetSequence.willStartToFadeIn())
+			{
+				_grid->initialize({});
+				_snake->initialize({});
 			}
 
-			if (_resetSequence.isPlaying()) _gameState = GameState::Snaking;
+			if (!_resetSequence.isPlaying()) _gameState = GameState::Snaking;
 		}
 
 		_gfxDevice->present();
@@ -92,11 +95,9 @@ namespace CPPSnake {
 
 	Void Application::drawScore()
 	{
-		HDC backBufferDC = _gfxDevice->getBackBufferDC();
-
-		std::string scoreText = "Score: " + std::to_string(_snake->getNUmFoodEaten());
-
-		SetTextColor(backBufferDC, 0x00FFFFFF);
-		TextOut(backBufferDC, 10, 10, scoreText.c_str(), (Int32)scoreText.length());
+		HDC backbufferDC = _gfxDevice->getBackbufferDC();
+		std::string info = "Score: " + std::to_string(_snake->getNumFoodEaten());
+		SetTextColor(backbufferDC, 0x00FFFFFF);
+		TextOut(backbufferDC, 10, 10, info.c_str(), (UInt32)info.length());
 	}
 }

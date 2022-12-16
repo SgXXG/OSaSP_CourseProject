@@ -2,10 +2,10 @@
 #include "Core.h"
 #include <windows.h>
 
-namespace CPPSnake {
-
-	class Timer {
-
+namespace CPPSnake
+{
+	class Timer
+	{
 		friend class Application;
 
 	private:
@@ -17,7 +17,12 @@ namespace CPPSnake {
 
 	public:
 
-		Float getCurrentTime() const;
+		Float getCurrentTime()
+		{
+			UInt64 ticks{};
+			QueryPerformanceCounter((LARGE_INTEGER*)&ticks);
+			return ticks * _toSeconds;
+		}
 
 	private:
 

@@ -1,11 +1,13 @@
 #pragma once
 #include "Core.h"
 
-namespace CPPSnake {
+namespace CPPSnake
+{
+	class ResetSequence
+	{
+		friend class Application;
 
-	class ResetSequence {
-
-	public:
+	private:
 
 		ResetSequence() {}
 		~ResetSequence() {}
@@ -13,14 +15,17 @@ namespace CPPSnake {
 		Void start();
 		Void draw();
 
-		Bool willStartToFadeIn() const { return _willStartToFadeIn; }
+	public:
+
 		Bool isPlaying() const { return _isPlaying; }
+		Bool isFadingOut() const { return _isFadingOut; }
+		Bool willStartToFadeIn() const { return _willStartToFadeIn; }
 
 	private:
 
-		Float _startTime{};
 		Bool _isPlaying{};
 		Bool _isFadingOut{};
 		Bool _willStartToFadeIn{};
+		Float _startTime{};
 	};
 }

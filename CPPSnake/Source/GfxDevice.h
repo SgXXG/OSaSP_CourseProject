@@ -1,17 +1,16 @@
 #pragma once
 #include "Core.h"
-#include <windows.h>
 #include "ApplicationWindow.h"
 
-namespace CPPSnake {
-
-	class GfxDevice : public IApplicationWindowListener {
-
+namespace CPPSnake
+{
+	class GfxDevice : public IApplicationWindowListener
+	{
 		friend class Application;
 
 	private:
 
-		GfxDevice() {}
+		GfxDevice();
 		~GfxDevice();
 
 		Bool initialize();
@@ -24,27 +23,26 @@ namespace CPPSnake {
 		Void drawSquare(const Coord2I32& topLeft, UInt32 size, UInt32 color);
 		Void drawTransparentQuad(const Coord2I32& topLeft, UInt32 width, UInt32 height, UInt32 color);
 
-		UInt32 getBufferWidth() const { return _bufferWidth; };
+		UInt32* getColorBuffer() { return _colorBuffer; }
+		UInt32 getBufferWidth() const { return _bufferWidth; }
 		UInt32 getBufferHeight() const { return _bufferHeight; }
-		UInt32* getColorBuffer() const { return _colorBuffer; }
-		HDC getBackBufferDC() const { return _backBufferDC; }
+		HDC getBackbufferDC() const { return _backbufferDC; }
 
 	private:
 
-		Bool createBackBuffer();
-		Void onAppWindowResized(const UInt32& newClientSize, Bool isMinimized);
+		Bool createBackbuffer();
+		Void onAppWindowResized(const Size2UI32& newClientSize, Bool isMinimized) override;
 
 	private:
 
-		HBITMAP _backBuffer{};
-		HBITMAP _BackBufferOut{};
-		HDC _backBufferDC{};
-		HDC _wndClientDC{};
+		HBITMAP _backbuffer = NULL;
+		HBITMAP _backbufferOut = NULL;
+		HDC _backbufferDC = NULL;
+		HDC _wndClientDC = NULL;
 
 		UInt32* _colorBuffer{};
 		UInt32 _bufferWidth{};
 		UInt32 _bufferHeight{};
-
 	};
 
 	extern GfxDevice* _gfxDevice;

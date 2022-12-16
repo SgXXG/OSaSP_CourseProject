@@ -1,22 +1,20 @@
 #pragma once
-#include "Core.h"
 #include "ApplicationWindow.h"
 #include "GfxDevice.h"
 #include "Grid.h"
-#include "Timer.h"
 #include "Snake.h"
 #include "ResetSequence.h"
 
-namespace CPPSnake {
-
-	enum class GameState {
-
+namespace CPPSnake
+{
+	enum class GameState
+	{
 		Snaking = 0,
 		Reset
 	};
-	
-	class Application {
 
+	class Application
+	{
 	public:
 
 		Application() {}
@@ -33,10 +31,10 @@ namespace CPPSnake {
 
 	private:
 
-		GridSettings _gridSettings{};
-		SnakeSettings _snakeSettings{};
-		ResetSequence _resetSequence{};
 		GameState _gameState = GameState::Snaking;
+		ResetSequence _resetSequence{};
+		SnakeSettings _snakeSettings{};
+		GridSettings _gridSettings{};
 	};
 
 	extern Application* _app;
